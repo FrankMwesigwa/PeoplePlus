@@ -10,3 +10,5 @@ git checkout develop
 git pull origin develop 
 git checkout -b statusFeature
 git push origin statusFeature 
+
+// all feature branches are based on the develop branch
