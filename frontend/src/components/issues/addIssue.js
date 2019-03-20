@@ -6,6 +6,8 @@ class AddIssue extends Component {
       <div>
         <h1>Add component here</h1>
         <h2>Add the description too</h2>
+        <h2>Add the description too</h2>;
+
       </div>
     );
   }
