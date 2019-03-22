@@ -35,7 +35,7 @@ class AddUser extends Component {
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
+      <input type="text" class="form-control" id="inputCity"/>
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">State</label>
@@ -46,12 +46,12 @@ class AddUser extends Component {
     </div>
     <div class="form-group col-md-2">
       <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
+      <input type="text" class="form-control" id="inputZip"/>
     </div>
   </div>
   <div class="form-group">
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <input class="form-check-input" type="checkbox" id="gridCheck"/>
       <label class="form-check-label" for="gridCheck">
         Check me out
       </label>
