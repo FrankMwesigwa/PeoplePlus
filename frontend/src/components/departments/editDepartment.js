@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class EditDepartments extends Component {
+class EditDepartment extends Component {
 
   state = {
-      branch: {}
+      department: {}
 }
 
   componentDidMount = () => {
     const id = this.props.match.params.id
-    axios.get('http://127.0.0.1:5000/department/'+id)
+    axios.get('http://127.0.0.1:5000/branch/'+id)
     .then(response => {
       this.setState({ department: response.data });
-      console.log(this.state.branch);
+      console.log(this.state.department);
     });
   }
 
@@ -25,12 +25,12 @@ class EditDepartments extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const id = this.props.match.params.id
-    const { departmentname, departmentlocation } = this.state.department;
+    const { name, location } = this.state.department;
 
-    axios.put('http://127.0.0.1:5000/department/'+id, { departmentname, departmentlocation })
+    axios.put('http://127.0.0.1:5000/branch/'+id, { name, location })
       .then(result => {
         console.log(result.data)
-        this.props.history.push('/department/'+id)
+        this.props.history.push('/branch/'+id)
       });
   }
 
@@ -44,13 +44,13 @@ class EditDepartments extends Component {
           <div class="box-body">
           <form className="white" onSubmit={this.handleSubmit}>
           <div class="form-group">
-            <label>Department departmentname</label>
-            <input type="text" class="form-control" name="name" value ={this.state.department.departmentname} onChange={this.handleChange} placeholder="Enter Departement Name"/>
+            <label>Department Name</label>
+            <input type="text" class="form-control" name="name" value ={this.state.branch.name} onChange={this.handleChange} placeholder="Enter Branch Name"/>
           </div>
 
           <div class="form-group">
-            <label>Department DepartmentLocation</label>
-            <input type="text" class="form-control" name="location" value ={this.state.branch.location} onChange={this.handleChange} placeholder="Enter department Location"/>
+            <label>Department Location</label>
+            <input type="text" class="form-control" name="location" value ={this.state.branch.location} onChange={this.handleChange} placeholder="Enter Branch Location"/>
           </div>
 
           <div class="footer">
@@ -66,4 +66,4 @@ class EditDepartments extends Component {
   }
 }
 
-export default EditDepartments;
+export default EditDepartment;

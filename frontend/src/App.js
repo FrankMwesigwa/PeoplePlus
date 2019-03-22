@@ -1,29 +1,32 @@
-import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter, Route , Switch } from 'react-router-dom';
 
-import AddIssue from './components/issues/addIssue';
-import IssueDetail from './components/issues/issueDetails';
-import IssuesList from './components/issues/issuesList';
-import EditIssue from './components/issues/editIssue';
+import Header from './components/layout/header'
+import Dashboard from './components/layout/dashboard'
+
+import AddDepartment from './components/departments/addDepartment'
+import CreateDepartment from '.components/departments/createDepartment'
+import ViewDepartment from './components/departments/detailsDepartment'
+import EditDepartment from './components/departments/editDepartment'
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <BrowserRouter>
-        <div className="container">
-          <div>
-            <Switch>
-              <Route exact path="/" Component={IssuesList} />
-              <Route exact path="/add" Component={AddIssue} />
-              <Route exact path="/issue/:id" Component={IssueDetail} />;
-              <Route exact path="/edit/:id" Component={EditIssue} />;
+      <div className="container">
+        <Header/>
+        <Switch>
+          <Route exact path='/' component={Dashboard} />
+          <Route exact path='/department/add' component={AddDepartment} />
+          <Route exact path='/departments' component={CreateDepartment} />
+          <Route exact path='/department/:id' component={ViewDepartment} />
+          <Route exact path='/departmentedit/:id' component={EditDepartment />
+        </Switch>
 
-            </Switch>
-          </div>
-        </div>
+      </div>
       </BrowserRouter>
     );
   }
-}
+  }
 
-export default App;
+export default ;
