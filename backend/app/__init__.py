@@ -18,7 +18,9 @@ jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
 migrate = Migrate(app, db)
 
+from app.departments import model
 
-from app.departments import departments
+from .departments import branch as departments_blueprint
+app.register_blueprint(departments_blueprint, )
 
-app.register_blueprint(departments)
+

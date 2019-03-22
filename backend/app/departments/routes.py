@@ -1,23 +1,23 @@
 from flask import Flask, request, jsonify, json
-from app.department import departments
+from app.getAllDepartments import department
 from app import db
-from app.departments.models import Department, departments_schema, department_schema
+from app.department.model import Department, departments_schema, department_schema
 
-# endpoint to create new tasks
-@departments.route("/departments", methods=["POST"])
+
+@department.route("/department", methods=["POST"])
 def addDepartment():
     jsn = request.data
     data = json.loads(jsn)
 
-    departmentname = data['departmentname']
-    departmentlocation = data['departmentlocation']
-
-    if Department.query.filter_by(departmentname=departmentname).count() == 0:
-         department = Department( departmentname,departmentlocation)
+    name = data['name']
+    location = data['location']
+    
+    if Department.query.filter_by(name=name).count() == 0:
+        department = Department(name,location)
         db.session.add(department)
         db.session.commit()
 
-        exists = Department.query.filter_by(departmentname=departmentname)
+        exists = Department.query.filter_by(name=name)
         if exists.count() > 0:
             return jsonify({'message':'Department has been successfully created'}), 201
         else:
@@ -25,18 +25,18 @@ def addDepartment():
     else:
         return jsonify({'message':'Department already exists, please try again'}), 400
 
-# endpoint to get all branch
+# endpoint to get all department
 @department.route("/department", methods=["GET"])
 def getAllDepartments():
     if request.method == 'GET':
-        branches = Department.query.all()
+        departments = Department.query.all()
         result = departments_schema.dump(departments)# deserialize the data picked from the db to json format 
         return jsonify(result.data)
     else:
-        return jsonify({"message":'no branch found'}), 400
+        return jsonify({"message":'no department found'}), 400
 
-# endpoint to get branch detail by id
-@department.route("/branch/<int:id>", methods=["GET"])
+# endpoint to get department detail by id
+@department.route("/department/<int:id>", methods=["GET"])
 def getdepartmentById(id):
     department = Department.query.get(id)
     if department:
@@ -44,18 +44,18 @@ def getdepartmentById(id):
     else:
         return jsonify({'message':'no department with that id exists'}), 404
 
-# endpoint to update branch
+# endpoint to update department
 @department.route("/department/<int:id>", methods=["PUT"])
 def updatedepartment(id):
     department = Department.query.get(id)
 
-    department.departmentname = request.json['departmentname']
-    department.departmentlocation = request.json['departmentlocation']
+    department.name = request.json['name']
+    department.location = request.json['location']
 
     db.session.commit()
     return jsonify({'message':'department successfully updated'}), 201
 
-# endpoint to delete branch
+# endpoint to delete department
 @department.route("/department/<int:id>", methods=["DELETE"])
 def deletedepartment(id):
     department = Department.query.get(id)
@@ -66,6 +66,3 @@ def deletedepartment(id):
         return jsonify({'message':'department was deleted successfully'}), 200
     else:
         return jsonify({'message':'no department with that id exists'}), 404
-
-
-
